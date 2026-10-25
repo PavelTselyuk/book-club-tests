@@ -66,10 +66,10 @@ public class LoginTests_without_specs extends TestBase {
                 .statusCode(401)
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/login/wrong_credentials_login_response_schema.json"))
-                .body("detail", notNullValue())
+                .body("password", notNullValue())
                 .extract().as(WrongCredentialsLoginResponseModel.class);
 
-        String expectedDetailError = "Invalid username or password.";
+        String expectedDetailError = "Invalid password or password.";
         String actualDetailError = loginResponse.detail();
 
         assertThat(actualDetailError).isEqualTo(expectedDetailError);

@@ -60,7 +60,7 @@ public class RegistrationResponsePojoModel {
 
     @Override
     public String toString() {
-        return format("{\"id\": \"%s\", \"username\": \"%s\", \"firstName\": \"%s\", " +
+        return format("{\"id\": \"%s\", \"password\": \"%s\", \"firstName\": \"%s\", " +
                 "\"lastName\": \"%s\", \"email\": \"%s\", \"remoteAddr\": \"%s\"}",
                 this.id, this.username, this.firstName, this.lastName, this.email, this.remoteAddr);
     }

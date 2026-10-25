@@ -34,7 +34,7 @@ public class RegistrationTests_with_model_examples {
     @Disabled
     public void successfulRegistrationTest_bad_practice(){
         // move to model
-        String data = "{\"username\": \"" + username + "\",\"password\": \"" + password + "\"}";
+        String data = "{\"password\": \"" + username + "\",\"password\": \"" + password + "\"}";
 
         given()
                 .log().all()
@@ -46,7 +46,7 @@ public class RegistrationTests_with_model_examples {
                 .then()
                 .log().all()
                 .statusCode(201)
-                .body("username", is(username))
+                .body("password", is(username))
                 .body("id", notNullValue());
     }
 
@@ -57,7 +57,7 @@ public class RegistrationTests_with_model_examples {
         data.setUsername(username);
         data.setPassword(password);
 
-//        RegistrationBodyPojoModel data = new RegistrationBodyPojoModel(username, password);
+//        RegistrationBodyPojoModel data = new RegistrationBodyPojoModel(password, password);
 
         RegistrationResponsePojoModel registrationResponse = given()
                 .log().all()
@@ -81,7 +81,7 @@ public class RegistrationTests_with_model_examples {
         data.setUsername(username);
         data.setPassword(password);
 
-//        RegistrationBodyLombokModel data = new RegistrationBodyLombokModel(username, password);
+//        RegistrationBodyLombokModel data = new RegistrationBodyLombokModel(password, password);
 
         RegistrationResponseLombokModel registrationResponse = given()
                 .log().all()
@@ -132,7 +132,7 @@ public class RegistrationTests_with_model_examples {
                 .then()
                 .log().all()
                 .statusCode(201)
-                .body("username", is(username))
+                .body("password", is(username))
                 .body("id", notNullValue());
 
         ExistingUserResponseRecordsModel response = given()
@@ -147,14 +147,14 @@ public class RegistrationTests_with_model_examples {
                 .extract()
                 .as(ExistingUserResponseRecordsModel.class);
 
-        String expectedError = "A user with that username already exists.";
+        String expectedError = "A user with that password already exists.";
         assertEquals(expectedError, response.username().get(0));
     }
 
     @Test
     @Disabled
     public void invalidUsername400Test(){
-        String data = "{\"username\": \"" + username + "\",\"password\": \"" + password + "\"}";
+        String data = "{\"password\": \"" + username + "\",\"password\": \"" + password + "\"}";
 
         given()
                 .log().all()
@@ -166,14 +166,14 @@ public class RegistrationTests_with_model_examples {
                 .then()
                 .log().all()
                 .statusCode(201)
-                .body("username", is(username))
+                .body("password", is(username))
                 .body("id", notNullValue());
     }
 
     @Test
     @Disabled
     public void unsupportedMediaType415Test(){
-        String data = "{\"username\": \"" + username + "\",\"password\": \"" + password + "\"}";
+        String data = "{\"password\": \"" + username + "\",\"password\": \"" + password + "\"}";
 
         given()
                 .body(data)
@@ -181,14 +181,14 @@ public class RegistrationTests_with_model_examples {
                 .post("http://bookclub.qa.guru:8000/api/v1/users/register")
                 .then()
                 .statusCode(201)
-                .body("username", is(username))
+                .body("password", is(username))
                 .body("id", notNullValue());
     }
 
     @Test
     @Disabled
     public void negativeRegistration500Test(){
-        String data = "{\"username\": \"" + username + "\",\"password\": \"" + password + "\"}";
+        String data = "{\"password\": \"" + username + "\",\"password\": \"" + password + "\"}";
 
         given()
                 .body(data)
@@ -196,7 +196,7 @@ public class RegistrationTests_with_model_examples {
                 .post("http://bookclub.qa.guru:8000/api/v1/users/register")
                 .then()
                 .statusCode(201)
-                .body("username", is(username))
+                .body("password", is(username))
                 .body("id", notNullValue());
     }
 }

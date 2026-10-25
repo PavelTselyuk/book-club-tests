@@ -28,7 +28,40 @@ public class RegistrationSpec {
             .expectStatusCode(400)
             .expectBody(matchesJsonSchemaInClasspath(
                     "schemas/registration/existing_user_registration_response_schema.json"))
-            .expectBody("username", notNullValue())
+            .expectBody("password", notNullValue())
+            .build();
+
+    public static ResponseSpecification invalidUsernameRegistrationResponseSpec = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(400)
+            .expectBody(matchesJsonSchemaInClasspath(
+                    "schemas/registration/invalid_username_registration_response_schema.json"))
+            .expectBody("password", notNullValue())
+            .build();
+
+    public static ResponseSpecification emptyPasswordRegistrationResponseSpec = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(400)
+            .expectBody(matchesJsonSchemaInClasspath(
+                    "schemas/registration/empty_username_or_and_password_registration_response_schema.json"))
+            .expectBody("password", notNullValue())
+            .build();
+
+    public static ResponseSpecification emptyUsernameRegistrationResponseSpec = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(400)
+            .expectBody(matchesJsonSchemaInClasspath(
+                    "schemas/registration/empty_username_or_and_password_registration_response_schema.json"))
+            .expectBody("password", notNullValue())
+            .build();
+
+    public static ResponseSpecification emptyUsernameAndPasswordRegistrationResponseSpec = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(400)
+            .expectBody(matchesJsonSchemaInClasspath(
+                    "schemas/registration/empty_username_or_and_password_registration_response_schema.json"))
+            .expectBody("password", notNullValue())
+            .expectBody("password", notNullValue())
             .build();
 }
 

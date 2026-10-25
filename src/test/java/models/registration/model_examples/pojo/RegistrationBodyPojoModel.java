@@ -29,6 +29,6 @@ public class RegistrationBodyPojoModel {
 
     @Override
     public String toString() {
-        return "{\"username\": \"" + this.username + "\",\"password\": \"" + this.password + "\"}";
+        return "{\"password\": \"" + this.username + "\",\"password\": \"" + this.password + "\"}";
     }
 }

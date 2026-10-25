@@ -1,14 +1,14 @@
 package tests;
 
-import models.registration.ExistingUserResponseModel;
-import models.registration.RegistrationBodyModel;
-import models.registration.SuccessfulRegistrationResponseModel;
+import models.registration.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
-import static tests.TestData.REGISTRATION_EXISTING_USER_ERROR;
-import static tests.TestData.REGISTRATION_IP_REGEXP;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static tests.TestData.*;
 
 public class RegistrationTests extends TestBase {
 
@@ -55,6 +55,49 @@ public class RegistrationTests extends TestBase {
         assertThat(actualError).isEqualTo(expectedError);
     }
 
-    // todo add more negative tests
+    @Test
+    public void invalidUserNameRegistrationTest() {
+        RegistrationBodyModel registrationData = new RegistrationBodyModel(INVALID_USERNAME_WITH_SPACES, password);
 
+        InvalidUsernameResponseModel secondRegistrationResponse =
+                (InvalidUsernameResponseModel)api.users.registerWithInvalidUsername(registrationData);
+
+        String actualError = secondRegistrationResponse.username().get(0);
+        assertThat(actualError).isEqualTo(REGISTRATION_WITH_INVALID_USERNAME_ERROR);
+    }
+
+    @Test
+    public void emptyPasswordRegistrationTest() {
+        RegistrationBodyModel registrationData = new RegistrationBodyModel(username, "");
+
+        EmptyPasswordResponseModel emptyPasswordResponse =
+                (EmptyPasswordResponseModel)api.users.registerWithEmptyPassword(registrationData);
+
+        String actualError = emptyPasswordResponse.password().get(0);
+        assertThat(actualError).isEqualTo(AUTH_WITH_EMPTY_PASSWORD_ERROR);
+    }
+
+    @Test
+    public void emptyUsernameRegistrationTest() {
+        RegistrationBodyModel registrationData = new RegistrationBodyModel("", password);
+
+        EmptyUsernameResponseModel emptyUsernameResponse =
+                (EmptyUsernameResponseModel) api.users.registerWithEmptyUsername(registrationData);
+
+        String actualError = emptyUsernameResponse.username().get(0);
+        assertThat(actualError).isEqualTo(AUTH_WITH_EMPTY_PASSWORD_ERROR);
+    }
+
+    @Test
+    public void emptyUsernameAndPasswordRegistrationTest() {
+        RegistrationBodyModel registrationData = new RegistrationBodyModel("", "");
+
+        EmptyUsernameAndPasswordResponseModel emptyUsernameResponse =
+                (EmptyUsernameAndPasswordResponseModel) api.users.registerWithEmptyUsernameAndEmptyPassword(registrationData);
+
+        String actualUsernameError = emptyUsernameResponse.username().get(0);
+        String actualPasswordError = emptyUsernameResponse.password().get(0);
+        assertThat(actualUsernameError).isEqualTo(AUTH_WITH_EMPTY_USERNAME_ERROR);
+        assertThat(actualPasswordError).isEqualTo(AUTH_WITH_EMPTY_PASSWORD_ERROR);
+    }
 }

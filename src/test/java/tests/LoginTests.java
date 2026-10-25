@@ -3,9 +3,15 @@ package tests;
 import models.login.LoginBodyModel;
 import models.login.SuccessfulLoginResponseModel;
 import models.login.WrongCredentialsLoginResponseModel;
+import models.registration.EmptyPasswordResponseModel;
+import models.registration.EmptyUsernameAndPasswordResponseModel;
+import models.registration.EmptyUsernameResponseModel;
 import org.junit.jupiter.api.Test;
 
+import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.notNullValue;
+import static specs.login.LoginSpec.loginRequestSpec;
 import static tests.TestData.*;
 
 public class LoginTests extends TestBase {
@@ -34,6 +40,36 @@ public class LoginTests extends TestBase {
         assertThat(actualDetailError).isEqualTo(expectedDetailError);
     }
 
-    // todo add more negative tests
+    @Test
+    public void emptyUsernameLoginTest() {
+        LoginBodyModel loginData = new LoginBodyModel("", LOGIN_PASSWORD);
+
+        EmptyUsernameResponseModel loginResponse = api.auth.loginEmptyUsername(loginData);
+
+        String actualError = loginResponse.username().get(0);
+        assertThat(actualError).isEqualTo(AUTH_WITH_EMPTY_USERNAME_ERROR);
+    }
+
+    @Test
+    public void emptyPasswordLoginTest() {
+        LoginBodyModel loginData = new LoginBodyModel(LOGIN_USERNAME, "");
+
+        EmptyPasswordResponseModel loginResponse = api.auth.loginEmptyPassword(loginData);
+
+        String actualError = loginResponse.password().get(0);
+        assertThat(actualError).isEqualTo(AUTH_WITH_EMPTY_PASSWORD_ERROR);
+    }
+
+    @Test
+    public void emptyUsernameAndPasswordLoginTest() {
+        LoginBodyModel loginData = new LoginBodyModel("", "");
+
+        EmptyUsernameAndPasswordResponseModel loginResponse = api.auth.loginEmptyUsernameAndPassword(loginData);
+
+        String actualUsernameError = loginResponse.username().get(0);
+        String actualPasswordError = loginResponse.password().get(0);
+        assertThat(actualUsernameError).isEqualTo(AUTH_WITH_EMPTY_USERNAME_ERROR);
+        assertThat(actualPasswordError).isEqualTo(AUTH_WITH_EMPTY_PASSWORD_ERROR);
+    }
 
 }
