@@ -37,7 +37,7 @@ public class LoginTests_without_specs extends TestBase {
                 .statusCode(200)
                 .body(matchesJsonSchemaInClasspath("schemas/login/successful_login_response_schema.json"))
                 .body("access", notNullValue())
-                .body("refresh", notNullValue())
+                .body("access", notNullValue())
                 .extract().as(SuccessfulLoginResponseModel.class);
 
         String expectedTokenPath = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";

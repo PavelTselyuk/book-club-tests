@@ -21,7 +21,7 @@ public class TestData {
 
     public static final String WRONG_TOKEN = "WrONg_TokEN";
     public static final String FAILED_LOGOUT_DETAIL_ERROR = "Token is invalid";
-    public static final String FAILED_LOGOUT_CODE_ERROR = "token_not_valid";
+    public static final String CODE_ERROR = "token_not_valid";
 
     public static final String REGISTRATION_IP_REGEXP =
             "^((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.){3}"
@@ -31,5 +31,6 @@ public class TestData {
         public static final String UPDATED_FIRSTNAME = "Steve";
         public static final String UPDATED_LASTNAME = "Johnson";
         public static final String UPDATED_EMAIL = "test@test.com";
+        public static final String FAILED_UPDATE_DETAIL = "Given token not valid for any token type";
 }
 

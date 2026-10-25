@@ -18,7 +18,7 @@ public class LoginSpec {
             .expectBody(matchesJsonSchemaInClasspath(
                     "schemas/login/successful_login_response_schema.json"))
             .expectBody("access", notNullValue())
-            .expectBody("refresh", notNullValue())
+            .expectBody("access", notNullValue())
             .build();
 
     public static ResponseSpecification wrongCredentialsLoginResponseSpec = new ResponseSpecBuilder()

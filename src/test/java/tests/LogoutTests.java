@@ -5,9 +5,7 @@ import models.logout.FailureLogoutResponseBodyModel;
 import models.logout.LogoutBodyModel;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
-import static specs.logout.LogoutSpec.logoutRequestSpec;
 import static tests.TestData.*;
 
 public class LogoutTests extends TestBase {
@@ -30,7 +28,7 @@ public class LogoutTests extends TestBase {
         String actualDetailError = logoutResponse.detail();
         String actualCodeError = logoutResponse.code();
         assertThat(actualDetailError).isEqualTo(FAILED_LOGOUT_DETAIL_ERROR);
-        assertThat(actualCodeError).isEqualTo(FAILED_LOGOUT_CODE_ERROR);
+        assertThat(actualCodeError).isEqualTo(CODE_ERROR);
 
     }
 

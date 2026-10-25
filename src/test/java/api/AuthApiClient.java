@@ -36,7 +36,18 @@ public class AuthApiClient {
                 .then()
                 .spec(successfulLoginResponseSpec)
                 .extract()
-                .path("refresh");
+                .path("access");
+    }
+
+    public String loginAndGetAccessToken(LoginBodyModel loginBody) {
+        return given(loginRequestSpec)
+                .body(loginBody)
+                .when()
+                .post("/auth/token/")
+                .then()
+                .spec(successfulLoginResponseSpec)
+                .extract()
+                .path("access");
     }
 
     public WrongCredentialsLoginResponseModel loginWrongCredentials(LoginBodyModel loginBody) {
