@@ -13,7 +13,7 @@ public class TestData {
     public static final String REGISTRATION_EXISTING_USER_ERROR =
             "A user with that username already exists.";
     public static final String REGISTRATION_WITH_INVALID_USERNAME_ERROR =
-            "Enter a valid password. This value may contain only letters, numbers, and @/./+/-/_ characters.";
+            "Enter a valid username. This value may contain only letters, numbers, and @/./+/-/_ characters.";
     public static final String AUTH_WITH_EMPTY_PASSWORD_ERROR =
             "This field may not be blank.";
     public static final String AUTH_WITH_EMPTY_USERNAME_ERROR =

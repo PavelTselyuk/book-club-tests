@@ -36,7 +36,7 @@ public class AuthApiClient {
                 .then()
                 .spec(successfulLoginResponseSpec)
                 .extract()
-                .path("access");
+                .path("refresh");
     }
 
     public String loginAndGetAccessToken(LoginBodyModel loginBody) {
