@@ -39,6 +39,4 @@ public class LogoutTests extends TestBase {
                 .spec(successfulLogoutResponseSpec);
         });
     }
-
-    // todo add more negative tests
 }

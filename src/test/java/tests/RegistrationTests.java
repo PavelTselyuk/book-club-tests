@@ -6,6 +6,7 @@ import models.registration.SuccessfulRegistrationResponseModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static specs.registration.RegistrationSpec.existingUserRegistrationResponseSpec;
@@ -27,59 +28,62 @@ public class RegistrationTests extends TestBase {
     }
 
     @Test
-    public void successfulRegistrationTest(){
+    public void successfulRegistrationTest() {
         RegistrationBodyModel registrationData = new RegistrationBodyModel(username, password);
 
-        SuccessfulRegistrationResponseModel registrationResponse = given()
-                .spec(registrationRequestSpec)
-                .body(registrationData)
-                .when()
-                .post("/users/register/")
-                .then()
-                .spec(successfulRegistrationResponseSpec)
-                .extract()
-                .as(SuccessfulRegistrationResponseModel.class);
+        SuccessfulRegistrationResponseModel registrationResponse = step("Регистрация и получение ответа", () ->
+                given()
+                        .spec(registrationRequestSpec)
+                        .body(registrationData)
+                        .when()
+                        .post("/users/register/")
+                        .then()
+                        .spec(successfulRegistrationResponseSpec)
+                        .extract()
+                        .as(SuccessfulRegistrationResponseModel.class)
+        );
+        step("Проверка полей ответа", () -> {
+            assertThat(registrationResponse.id()).isGreaterThan(0);
+            assertThat(registrationResponse.username()).isEqualTo(username);
+            assertThat(registrationResponse.firstName()).isEqualTo("");
+            assertThat(registrationResponse.lastName()).isEqualTo("");
+            assertThat(registrationResponse.email()).isEqualTo("");
 
-        assertThat(registrationResponse.id()).isGreaterThan(0);
-        assertThat(registrationResponse.username()).isEqualTo(username);
-        assertThat(registrationResponse.firstName()).isEqualTo("");
-        assertThat(registrationResponse.lastName()).isEqualTo("");
-        assertThat(registrationResponse.email()).isEqualTo("");
-
-        assertThat(registrationResponse.remoteAddr()).matches(REGISTRATION_IP_REGEXP);
+            assertThat(registrationResponse.remoteAddr()).matches(REGISTRATION_IP_REGEXP);
+        });
     }
 
     @Test
-    public void existingUserWrongRegistrationTest(){
+    public void existingUserWrongRegistrationTest() {
         RegistrationBodyModel registrationData = new RegistrationBodyModel(username, password);
+        step("Регистрация и проверка успешности", () -> {
+            SuccessfulRegistrationResponseModel firstRegistrationResponse = given()
+                    .spec(registrationRequestSpec)
+                    .body(registrationData)
+                    .when()
+                    .post("/users/register/")
+                    .then()
+                    .spec(successfulRegistrationResponseSpec)
+                    .extract()
+                    .as(SuccessfulRegistrationResponseModel.class);
+            assertThat(firstRegistrationResponse.username()).isEqualTo(username);
+        });
 
-        SuccessfulRegistrationResponseModel firstRegistrationResponse = given()
-                .spec(registrationRequestSpec)
-                .body(registrationData)
-                .when()
-                .post("/users/register/")
-                .then()
-                .spec(successfulRegistrationResponseSpec)
-                .extract()
-                .as(SuccessfulRegistrationResponseModel.class);
+        ExistingUserResponseModel secondRegistrationResponse = step("Регистрация и проверка успешности", () ->
+                given()
+                        .spec(registrationRequestSpec)
+                        .body(registrationData)
+                        .when()
+                        .post("/users/register/")
+                        .then()
+                        .spec(existingUserRegistrationResponseSpec)
+                        .extract()
+                        .as(ExistingUserResponseModel.class)
+        );
 
-        assertThat(firstRegistrationResponse.username()).isEqualTo(username);
-
-        ExistingUserResponseModel secondRegistrationResponse = given()
-                .spec(registrationRequestSpec)
-                .body(registrationData)
-                .when()
-                .post("/users/register/")
-                .then()
-                .spec(existingUserRegistrationResponseSpec)
-                .extract()
-                .as(ExistingUserResponseModel.class);
-
-        String expectedError = REGISTRATION_EXISTING_USER_ERROR;
-        String actualError = secondRegistrationResponse.username().get(0);
-        assertThat(actualError).isEqualTo(expectedError);
+        step("Проверяем правильную ошибку", () -> {
+            String actualError = secondRegistrationResponse.username().get(0);
+            assertThat(actualError).isEqualTo(REGISTRATION_EXISTING_USER_ERROR);
+        });
     }
-
-    // todo add more negative tests
-
 }
