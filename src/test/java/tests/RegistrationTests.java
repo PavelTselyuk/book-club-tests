@@ -69,7 +69,7 @@ public class RegistrationTests extends TestBase {
             assertThat(firstRegistrationResponse.username()).isEqualTo(username);
         });
 
-        ExistingUserResponseModel secondRegistrationResponse = step("Регистрация и проверка успешности", () ->
+        ExistingUserResponseModel secondRegistrationResponse = step("Регистрация уже существующего пользователя", () ->
                 given()
                         .spec(registrationRequestSpec)
                         .body(registrationData)
