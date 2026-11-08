@@ -15,6 +15,7 @@ import static specs.logout.LogoutSpec.successfulLogoutResponseSpec;
 
 public class AuthApiClient {
 
+    @Step("Успешный логин и получение ответа")
     public SuccessfulLoginResponseModel login(LoginBodyModel loginBody) {
         return given(loginRequestSpec)
                 .body(loginBody)
@@ -38,6 +39,7 @@ public class AuthApiClient {
                 .path("refresh");
     }
 
+    @Step("Логин с неверными авторизационными данными и получение ответа")
     public WrongCredentialsLoginResponseModel loginWrongCredentials(LoginBodyModel loginBody) {
         return given(loginRequestSpec)
                 .body(loginBody)

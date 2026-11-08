@@ -1,5 +1,6 @@
 package api;
 
+import io.qameta.allure.Step;
 import models.registration.ExistingUserResponseModel;
 import models.registration.RegistrationBodyModel;
 import models.registration.SuccessfulRegistrationResponseModel;
@@ -11,6 +12,7 @@ import static specs.registration.RegistrationSpec.successfulRegistrationResponse
 
 public class UsersApiClient {
 
+    @Step("Успешная регистрация и получение ответа")
     public SuccessfulRegistrationResponseModel register(RegistrationBodyModel body) {
         return given(registrationRequestSpec)
                 .body(body)
@@ -22,6 +24,7 @@ public class UsersApiClient {
                 .as(SuccessfulRegistrationResponseModel.class);
     }
 
+    @Step("Неудачная регистрация с уже существующими учетными данными и получение ответа")
     public ExistingUserResponseModel registerExistingUser(RegistrationBodyModel body) {
         return given(registrationRequestSpec)
                 .body(body)

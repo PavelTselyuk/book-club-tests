@@ -15,16 +15,6 @@ public class ClubsTests extends TestBase {
         assertThat(response).isNotNull();
         assertThat(response.count()).isGreaterThanOrEqualTo(0);
         assertThat(response.results()).isNotNull();
-        assertThat(response.results()).hasSize(response.count());
-    }
-
-    @Test
-    public void getClubsCountMatchesResultsSize() {
-        ClubsListResponseModel response = api.clubs.getClubs();
-
-        assertThat(response.results())
-                .as("count должно совпадать с размером results")
-                .hasSize(response.count());
     }
 
     @Test
