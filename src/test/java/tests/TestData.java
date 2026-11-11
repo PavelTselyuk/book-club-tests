@@ -3,8 +3,8 @@ package tests;
 public class TestData {
 
     public static final String LOGIN_ID = "2";
-    public static final String LOGIN_USERNAME = "user8";
-    public static final String LOGIN_PASSWORD = "user8";
+    public static final String LOGIN_USERNAME = "user888";
+    public static final String LOGIN_PASSWORD = "user888";
     public static final String LOGIN_WRONG_PASSWORD = "qaguru1234";
 
     public static final String LOGIN_TOKEN_PREFIX = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
