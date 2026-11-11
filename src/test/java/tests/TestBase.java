@@ -11,19 +11,23 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import pages.ClubPage;
+import pages.CreateClubPage;
 import pages.LoginPage;
 import pages.ProfilePage;
+import pages.SignupPage;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.webdriver;
 
 public class TestBase {
-    Faker faker = new Faker();
+    protected Faker faker = new Faker();
     protected static final ApiClient api = new ApiClient();
 
-    ClubPage clubPage = new ClubPage();
-    LoginPage loginPage = new LoginPage();
-    ProfilePage profilePage = new ProfilePage();
+    protected ClubPage clubPage = new ClubPage();
+    protected CreateClubPage createClubPage = new CreateClubPage();
+    protected LoginPage loginPage = new LoginPage();
+    protected ProfilePage profilePage = new ProfilePage();
+    protected SignupPage signupPage = new SignupPage();
 
     @BeforeAll
     public static void setUp() {

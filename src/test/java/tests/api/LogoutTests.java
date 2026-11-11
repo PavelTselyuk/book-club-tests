@@ -1,4 +1,4 @@
-package tests;
+package tests.api;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
@@ -10,6 +10,7 @@ import models.registration.RegistrationBodyModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
 import static tests.TestData.LOGIN_PASSWORD;
 import static tests.TestData.LOGIN_USERNAME;
@@ -55,9 +56,11 @@ public class LogoutTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     public void successfulLogoutAsNewUserTest() {
         profilePage.openBlankPageWithNewUser();
-        profilePage.openPage()
-                .pressLogoutButton()
-                .loginPageShouldBeOpened();
+        profilePage.openPage();
+
+        profilePage.pressLogoutButton();
+
+        loginPage.loginPageShouldBeOpened();
     }
 
     @Test
@@ -67,9 +70,11 @@ public class LogoutTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     public void successfulLogoutAsExistingUserTest() {
         profilePage.openBlankPageWithExistingUser();
-        profilePage.openPage()
-                .pressLogoutButton()
-                .loginPageShouldBeOpened();
+        profilePage.openPage();
+
+        profilePage.pressLogoutButton();
+
+        loginPage.loginPageShouldBeOpened();
     }
 
     // todo add more negative tests

@@ -1,4 +1,4 @@
-package tests;
+package tests.api;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
@@ -8,6 +8,7 @@ import models.clubs.ClubModel;
 import models.clubs.ClubsListResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

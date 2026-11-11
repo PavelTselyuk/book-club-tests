@@ -7,6 +7,11 @@ public class TestData {
     public static final String LOGIN_PASSWORD = "user888";
     public static final String LOGIN_WRONG_PASSWORD = "qaguru1234";
 
+    /** Клуб, созданный user888 — покинуть нельзя. */
+    public static final int USER888_OWNED_CLUB_ID = 8517;
+    /** Чужой клуб — можно вступить и покинуть. */
+    public static final int OTHER_CLUB_ID = 40;
+
     public static final String LOGIN_TOKEN_PREFIX = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
     public static final String LOGIN_WRONG_CREDENTIALS_ERROR = "Invalid username or password.";
 

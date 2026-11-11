@@ -1,4 +1,4 @@
-package tests;
+package tests.api;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
@@ -10,10 +10,10 @@ import models.registration.SuccessfulRegistrationResponseModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static tests.TestData.REGISTRATION_EXISTING_USER_ERROR;
-import static tests.TestData.REGISTRATION_IP_REGEXP;
+import static tests.TestData.*;
 
 @Feature("Регистрация")
 public class RegistrationTests extends TestBase {

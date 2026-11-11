@@ -1,4 +1,4 @@
-package tests;
+package tests.api;
 
 import models.login.LoginBodyModel;
 import models.registration.RegistrationBodyModel;
@@ -6,6 +6,7 @@ import models.users.UpdateUserBodyModel;
 import models.users.UserProfileResponseModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static tests.TestData.REGISTRATION_IP_REGEXP;

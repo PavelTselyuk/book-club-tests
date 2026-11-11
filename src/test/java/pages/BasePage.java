@@ -20,7 +20,7 @@ public class BasePage {
     @Step("[UI] Регистрация пользователя, установка сессии и открытие страницы:")
     public SuccessfulLoginResponseModel openBlankPageWithNewUser() {
         Faker faker = new Faker();
-        String username = faker.name().firstName() + faker.name().lastName();
+        String username = faker.name().firstName();
         String password = "12345";
 
         // register user

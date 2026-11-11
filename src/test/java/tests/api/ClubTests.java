@@ -1,4 +1,4 @@
-package tests;
+package tests.api;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -28,7 +29,7 @@ public class ClubTests extends TestBase {
     @BeforeEach
     public void prepareTestData() {
         // оставляем генерацию данных в тесте, чтобы каждый запуск был с новыми пользователями
-        username = faker.name().firstName();
+        username = faker.name().firstName() + "_" + faker.internet().uuid();
         password = "12345";
     }
 
@@ -67,7 +68,7 @@ public class ClubTests extends TestBase {
     @DisplayName("[API] Создание клуба")
     @Severity(SeverityLevel.CRITICAL)
     public void createClub_byApiTest() {
-        String bookTitle = "API Club " + faker.book().title();
+        String bookTitle = "API Club " + faker.internet().uuid();
         String bookAuthors = faker.book().author();
         Integer publicationYear = 2020;
         String description = faker.lorem().sentence();

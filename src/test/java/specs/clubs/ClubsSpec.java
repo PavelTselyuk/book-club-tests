@@ -45,4 +45,9 @@ public class ClubsSpec {
                     "schemas/clubs/unauthorized_create_club_response_schema.json"))
             .expectBody("detail", equalTo("Authentication credentials were not provided."))
             .build();
+
+    public static ResponseSpecification successfulDeleteClubResponseSpec = new ResponseSpecBuilder()
+            .log(ALL)
+            .expectStatusCode(204)
+            .build();
 }
