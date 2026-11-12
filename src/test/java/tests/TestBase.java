@@ -28,9 +28,6 @@ public class TestBase {
     protected Faker faker = new Faker();
     protected static final ApiClient api = new ApiClient();
 
-    protected static final String LOGIN_USERNAME = System.getProperty("username");
-    protected static final String LOGIN_PASSWORD = System.getProperty("password");
-
     protected ClubPage clubPage = new ClubPage();
     protected CreateClubPage createClubPage = new CreateClubPage();
     protected LoginPage loginPage = new LoginPage();

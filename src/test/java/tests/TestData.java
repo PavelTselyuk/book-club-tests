@@ -3,8 +3,8 @@ package tests;
 public class TestData {
 
     public static final String LOGIN_ID = "2";
-//    public static final String LOGIN_USERNAME = System.getProperty("username");
-//    public static final String LOGIN_PASSWORD = System.getProperty("password");
+    public static final String LOGIN_USERNAME = System.getProperty("username");
+    public static final String LOGIN_PASSWORD = System.getProperty("password");
     public static final String LOGIN_WRONG_PASSWORD = "qaguru1234";
 
     /** Клуб, созданный user888 — покинуть нельзя. */
