@@ -12,9 +12,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
 
-import static tests.TestData.LOGIN_PASSWORD;
-import static tests.TestData.LOGIN_USERNAME;
-
 @Feature("Выход из аккаунта")
 public class LogoutTests extends TestBase {
 

@@ -16,8 +16,6 @@ import org.junit.jupiter.api.Test;
 import tests.TestBase;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static tests.TestData.LOGIN_PASSWORD;
-import static tests.TestData.LOGIN_USERNAME;
 
 @Feature("Отзывы")
 public class ReviewsTests extends TestBase {

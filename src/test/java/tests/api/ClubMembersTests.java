@@ -10,8 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
 
-import static tests.TestData.LOGIN_PASSWORD;
-import static tests.TestData.LOGIN_USERNAME;
 import static tests.TestData.OTHER_CLUB_ID;
 import static tests.TestData.USER888_OWNED_CLUB_ID;
 
